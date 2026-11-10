@@ -26,7 +26,7 @@ export async function handleReportTool(
 | **Issue** | ${sub.report} |
 
 ----
-*Submitted via FCUK PAYWALLS index*
+*Submitted via OpenTab index*
     `.trim();
 
   // Added to make it easier to spot in the GitHub Issues page.
@@ -40,7 +40,7 @@ export async function handleReportTool(
         Authorization: `Bearer ${env.GITHUB_TOKEN}`,
         "Content-Type": "application/json",
         Accept: "application/vnd.github+json",
-        "User-Agent": "fcuk-paywalls-worker/1.0",
+        "User-Agent": "opentab-worker/1.0",
       },
       body: JSON.stringify({
         title: `[Tool Report] ${sub.toolId}`,

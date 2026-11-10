@@ -42,7 +42,7 @@ export function Header({
             type="button"
             className="cursor-pointer border-0 bg-transparent p-0"
             onClick={goToIndex}
-            aria-label="FCUK PAYWALLS — back to all tools"
+            aria-label="OpenTab — back to all tools"
           >
             <Wordmark />
           </button>
@@ -75,7 +75,7 @@ export function Header({
 
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <a
-            href="https://github.com/vaibhxvvy/fcuk-paywalls"
+            href="https://github.com/vaibhxvvy/opentab"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`GitHub repository, current stars: ${starsCount}`}

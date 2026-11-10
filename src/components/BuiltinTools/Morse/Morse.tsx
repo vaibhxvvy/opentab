@@ -47,7 +47,7 @@ function morseToText(morse: string): string {
 }
 
 export function Morse() {
-  const [text, setText] = useState("SOS — fcuk paywalls");
+  const [text, setText] = useState("SOS — opentab");
   const [morse, setMorse] = useState("");
   const [mode, setMode] = useState<"enc" | "dec">("enc");
   const [wpm, setWpm] = useState(20);

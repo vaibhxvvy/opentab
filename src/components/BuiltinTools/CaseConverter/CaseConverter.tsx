@@ -71,7 +71,7 @@ const TRANSFORMS: Record<string, (s: string) => string> = {
 };
 
 export function CaseConverter() {
-  const [input, setInput] = useState("fcuk paywalls, no signup required");
+  const [input, setInput] = useState("opentab, no signup required");
   const [copied, setCopied] = useState<string | null>(null);
 
   const results = useMemo(() => {

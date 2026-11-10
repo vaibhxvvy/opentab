@@ -1,4 +1,4 @@
-name = "fcksignups-submit"
+name = "opentab-submit"
 main = "worker.ts"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
@@ -8,9 +8,9 @@ compatibility_flags = ["nodejs_compat"]
 #
 #   npx wrangler secret put GITHUB_TOKEN        # PAT with `repo` scope
 #   npx wrangler secret put GITHUB_REPO_OWNER   # vaibhxvvy
-#   npx wrangler secret put GITHUB_REPO_NAME    # fcuk-paywalls
+#   npx wrangler secret put GITHUB_REPO_NAME    # opentab
 #
 # For local dev, create a .dev.vars file (gitignored):
 #   GITHUB_TOKEN=ghp_...
 #   GITHUB_REPO_OWNER=vaibhxvvy
-#   GITHUB_REPO_NAME=fcuk-paywalls
+#   GITHUB_REPO_NAME=opentab

@@ -20,7 +20,7 @@ export function Wordmark({ className, compact = false }: WordmarkProps) {
             compact && "text-lg",
           )}
         >
-          FCUK
+          OPEN
         </span>
         <span
           className={cn(
@@ -28,7 +28,7 @@ export function Wordmark({ className, compact = false }: WordmarkProps) {
             compact && "text-base",
           )}
         >
-          PAYWALLS
+          TAB
         </span>
       </span>
       <span

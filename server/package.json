@@ -1,0 +1,11 @@
+{
+  "name": "opentab-local-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Loopback-only local backend for OpenTab: YouTube metadata + downloads via yt-dlp, on your own machine.",
+  "scripts": {
+    "start": "node index.mjs",
+    "setup": "node scripts/fetch-ytdlp.mjs"
+  }
+}

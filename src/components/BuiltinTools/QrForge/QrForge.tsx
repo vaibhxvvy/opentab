@@ -9,7 +9,7 @@ const SIZES = [128, 256, 512] as const;
 const LEVELS = ["L", "M", "Q", "H"] as const;
 
 export function QrForge() {
-  const [text, setText] = useState("https://github.com/vaibhxvvy/fcuk-paywalls");
+  const [text, setText] = useState("https://github.com/vaibhxvvy/opentab");
   const [size, setSize] = useState<number>(256);
   const [level, setLevel] = useState<(typeof LEVELS)[number]>("M");
 

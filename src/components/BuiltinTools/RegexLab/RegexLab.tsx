@@ -4,8 +4,8 @@ import { ToolShell } from "../shared/ToolShell";
 import { Button } from "../../ui/button";
 import { cn } from "../../../utils/cn";
 
-const SAMPLE_PATTERN = "fcuk|paywalls|wall[s]?";
-const SAMPLE_TEXT = "Paywalls are the worst. Crack the wall, fck the signup.\nNo walls in this tab — fcuk paywalls, build tools.\nwall wall wall";
+const SAMPLE_PATTERN = "opentab|paywalls|wall[s]?";
+const SAMPLE_TEXT = "Paywalls are the worst. Crack the wall, fck the signup.\nNo walls in this tab — opentab, build tools.\nwall wall wall";
 
 function escapeHtml(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

@@ -81,7 +81,7 @@ export function Hero({ searchQuery, setSearchQuery }: HeroProps) {
           <p className="mt-4 rounded-md border-2 border-dashed border-ink/40 p-3 font-mono text-[11px] font-semibold uppercase tracking-widest text-ink/60">
             [ SYSTEM ] FOUND A TOOL THAT ASKS FOR AN EMAIL?{" "}
             <a
-              href="https://github.com/vaibhxvvy/fcuk-paywalls/issues/new?template=request-to-add-a-tool.md"
+              href="https://github.com/vaibhxvvy/opentab/issues/new?template=request-to-add-a-tool.md"
               className="text-ink underline decoration-red decoration-2 underline-offset-2 hover:bg-yellow"
             >
               KILL IT

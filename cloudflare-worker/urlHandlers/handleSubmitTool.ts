@@ -39,7 +39,7 @@ For automation tool:
 <SUBMISSION>${sub.name};;${sub.description};;${sub.url};;${sub.tags.length ? sub.tags.join(",") : "—"};;${sub.github || "—"};;${sub.category}</SUBMISSION>
 
 ----
-*Submitted via FCUK PAYWALLS index*
+*Submitted via OpenTab index*
     `.trim();
 
   // Added to make it easier to spot in the GitHub Issues page.
@@ -54,7 +54,7 @@ For automation tool:
         Authorization: `Bearer ${env.GITHUB_TOKEN}`,
         "Content-Type": "application/json",
         Accept: "application/vnd.github+json",
-        "User-Agent": "fcuk-paywalls-worker/1.0",
+        "User-Agent": "opentab-worker/1.0",
       },
       body: JSON.stringify({
         title: `[Tool Submission Request] ${sub.name}`,

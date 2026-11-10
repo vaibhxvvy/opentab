@@ -145,7 +145,7 @@ export function PaywallPatterns() {
         <p className="mt-8 font-mono text-[11px] font-bold uppercase tracking-widest text-paper/60">
           Spot a paywall we haven't killed?{" "}
           <a
-            href="https://github.com/vaibhxvvy/fcuk-paywalls/issues/new?template=request-to-add-a-tool.md"
+            href="https://github.com/vaibhxvvy/opentab/issues/new?template=request-to-add-a-tool.md"
             className="bg-yellow px-1 text-ink no-underline"
           >
             report it

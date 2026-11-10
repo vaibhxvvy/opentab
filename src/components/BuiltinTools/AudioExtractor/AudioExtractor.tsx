@@ -4,9 +4,28 @@ import { ToolShell } from "../shared/ToolShell";
 import { Button } from "../../ui/button";
 
 const fmt = (s: number) => {
+  if (!Number.isFinite(s) || s < 0) return "00:00";
   const m = Math.floor(s / 60);
   const sec = Math.floor(s % 60);
   return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+};
+
+/** Accept plain seconds ("90"), m:ss ("1:30"), h:mm:ss, or shorthand ("1h2m3s"). */
+const parseTimestamp = (raw: string): number | null => {
+  const t = raw.trim().toLowerCase();
+  if (!t) return null;
+  if (/^\d+(\.\d+)?$/.test(t)) return Math.max(0, Number(t));
+  const hms = /(?:(\d+)h)?(?:(\d+)m)?(?:(\d+(?:\.\d+)?)s)?/.exec(t);
+  if (hms && (hms[1] || hms[2] || hms[3])) {
+    return (Number(hms[1] ?? 0) * 3600) + (Number(hms[2] ?? 0) * 60) + Number(hms[3] ?? 0);
+  }
+  if (/^[\d:.]+$/.test(t)) {
+    const parts = t.split(":").map(Number);
+    if (parts.length <= 3 && parts.every((n) => Number.isFinite(n) && n >= 0)) {
+      return parts.reduce((acc, n) => acc * 60 + n, 0);
+    }
+  }
+  return null;
 };
 
 const encodeWav = (buffer: AudioBuffer): Blob => {
@@ -53,14 +72,20 @@ export function AudioExtractor() {
   const [duration, setDuration] = useState(0);
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(0);
+  const [startText, setStartText] = useState("00:00");
+  const [endText, setEndText] = useState("00:00");
   const [busy, setBusy] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const renderRef = useRef<OfflineAudioContext | null>(null);
+  const fileRef = useRef<File | null>(null);
 
   const onFile = (f: File) => {
     setName(f.name);
     setError(null);
+    fileRef.current = f;
+    setStart(0);
+    setStartText("00:00");
+    setEndText("00:00");
     if (url) URL.revokeObjectURL(url);
     const u = URL.createObjectURL(f);
     setUrl(u);
@@ -73,27 +98,42 @@ export function AudioExtractor() {
 
   const extract = async () => {
     const v = videoRef.current;
-    if (!v || !url) return;
+    const f = fileRef.current;
+    if (!v || !url || !f) return;
     if (end - start < 0.05) {
       setError("Pick a range longer than a blink.");
+      return;
+    }
+    if (end - start > 3600) {
+      setError("That range is over an hour — split it with the audio splitter first, then extract each part.");
       return;
     }
     setError(null);
     setBusy(true);
     v.pause();
     setPlaying(false);
-    const elem = new Audio();
-    elem.src = url;
-    elem.currentTime = start;
-    await elem.load();
     try {
-      const ctx = new OfflineAudioContext(2, Math.ceil((end - start) * 48000), 48000);
-      renderRef.current = ctx;
-      const src = (ctx as unknown as AudioContext).createMediaElementSource(elem);
-      const gain = ctx.createGain();
-      src.connect(gain);
-      gain.connect(ctx.destination);
-      await elem.play();
+      // Decode the file straight to samples — no playback, no media-element
+      // hacks (createMediaElementSource does not exist on OfflineAudioContext).
+      const buf = await f.arrayBuffer();
+      const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const actx = new AC();
+      let decoded: AudioBuffer;
+      try {
+        decoded = await actx.decodeAudioData(buf);
+      } finally {
+        await actx.close().catch(() => undefined);
+      }
+      // Slice [start, end) and resample to 48 kHz stereo via a buffer source,
+      // which OfflineAudioContext fully supports.
+      const s0 = Math.max(0, Math.floor(start * decoded.sampleRate));
+      const s1 = Math.min(decoded.length, Math.ceil(end * decoded.sampleRate));
+      const dur = Math.max(0.01, (s1 - s0) / decoded.sampleRate);
+      const ctx = new OfflineAudioContext(2, Math.ceil(dur * 48000), 48000);
+      const src = ctx.createBufferSource();
+      src.buffer = decoded;
+      src.connect(ctx.destination);
+      src.start(0, s0 / decoded.sampleRate, dur);
       const buffer = await ctx.startRendering();
       const blob = encodeWav(buffer);
       const out = URL.createObjectURL(blob);
@@ -102,13 +142,36 @@ export function AudioExtractor() {
       a.download = `${name.replace(/\.[^.]+$/, "")}.wav`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(out), 60_000);
-      elem.pause();
     } catch {
-      setError("Could not extract audio — this browser may not support offline rendering of media elements.");
+      setError("Could not decode that file — DRM-protected or corrupt files won't decode. Try another file.");
     } finally {
       setBusy(false);
       setPlaying(false);
     }
+  };
+
+  const commitStartText = () => {
+    const parsed = parseTimestamp(startText);
+    if (parsed === null) {
+      setStartText(fmt(start));
+      return;
+    }
+    const t = Math.max(0, Math.min(parsed, Math.max(end - 0.05, 0)));
+    setStart(t);
+    setStartText(fmt(t));
+    const v = videoRef.current;
+    if (v && Number.isFinite(t)) v.currentTime = t;
+  };
+
+  const commitEndText = () => {
+    const parsed = parseTimestamp(endText);
+    if (parsed === null) {
+      setEndText(fmt(end));
+      return;
+    }
+    const t = Math.min(Math.max(parsed, start + 0.05), Math.max(duration, start + 0.05));
+    setEnd(t);
+    setEndText(fmt(t));
   };
 
   const togglePlay = () => {
@@ -162,6 +225,7 @@ export function AudioExtractor() {
                 const d = e.currentTarget.duration;
                 setDuration(d);
                 setEnd(d);
+                setEndText(fmt(d));
               }} />
               <button
                 type="button"
@@ -178,6 +242,20 @@ export function AudioExtractor() {
             <label className="block">
               <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink/50">Start</span>
               <input
+                type="text"
+                value={startText}
+                onChange={(e) => setStartText(e.target.value)}
+                onBlur={commitStartText}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") e.currentTarget.blur();
+                }}
+                placeholder="0:00"
+                spellCheck={false}
+                inputMode="decimal"
+                aria-label="Start timestamp — seconds or m:ss"
+                className="mt-2 w-full rounded-md border-2 border-ink bg-surface-muted px-2 py-1.5 font-mono text-xs font-bold text-ink outline-none placeholder:text-ink/30 focus:border-yellow"
+              />
+              <input
                 type="range"
                 min={0}
                 max={Math.max(duration, 0.01)}
@@ -185,16 +263,32 @@ export function AudioExtractor() {
                 value={start}
                 onChange={(e) => {
                   const s = Number(e.target.value);
-                  setStart(Math.min(s, end - 0.05));
+                  const clamped = Math.min(s, end - 0.05);
+                  setStart(clamped);
+                  setStartText(fmt(clamped));
                   const v = videoRef.current;
-                  if (v) v.currentTime = s;
+                  if (v) v.currentTime = clamped;
                 }}
+                aria-label="Start slider"
                 className="mt-2 w-full accent-ink"
               />
-              <span className="mt-1 block font-mono text-[10px] font-bold text-ink/60">{fmt(start)}</span>
             </label>
             <label className="block">
               <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink/50">End</span>
+              <input
+                type="text"
+                value={endText}
+                onChange={(e) => setEndText(e.target.value)}
+                onBlur={commitEndText}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") e.currentTarget.blur();
+                }}
+                placeholder="0:00"
+                spellCheck={false}
+                inputMode="decimal"
+                aria-label="End timestamp — seconds or m:ss"
+                className="mt-2 w-full rounded-md border-2 border-ink bg-surface-muted px-2 py-1.5 font-mono text-xs font-bold text-ink outline-none placeholder:text-ink/30 focus:border-yellow"
+              />
               <input
                 type="range"
                 min={0}
@@ -203,13 +297,18 @@ export function AudioExtractor() {
                 value={end}
                 onChange={(e) => {
                   const en = Number(e.target.value);
-                  setEnd(Math.min(Math.max(en, start + 0.05), duration));
+                  const clamped = Math.min(Math.max(en, start + 0.05), duration);
+                  setEnd(clamped);
+                  setEndText(fmt(clamped));
                 }}
+                aria-label="End slider"
                 className="mt-2 w-full accent-ink"
               />
-              <span className="mt-1 block font-mono text-[10px] font-bold text-ink/60">{fmt(end)}</span>
             </label>
           </div>
+          <p className="mt-2 font-mono text-[9px] font-semibold uppercase tracking-widest text-ink/40">
+            Type exact stamps — `90`, `1:30` or `1h2m3s` — Enter jumps the preview
+          </p>
 
           {error && (
             <p className="mt-4 rounded-md border-2 border-ink bg-red/20 px-3 py-3 font-mono text-xs font-bold uppercase tracking-widest text-ink">

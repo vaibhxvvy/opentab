@@ -1,5 +1,5 @@
 {
-  "name": "fcuk-paywalls-submit-worker",
+  "name": "opentab-submit-worker",
   "version": "1.0.0",
   "private": true,
   "scripts": {

@@ -28,10 +28,10 @@ const inputCls =
 const EMPTY: CardData = {
   name: "Rhea Sharma",
   role: "Lead Designer",
-  company: "FCUK PAYWALLS CO.",
-  email: "rhea@fcukpaywalls.com",
+  company: "OpenTab Co.",
+  email: "rhea@opentab.com",
   phone: "+91 98765 43210",
-  website: "fcukpaywalls.com",
+  website: "opentab.com",
   address: "Bengaluru, IN",
 };
 

@@ -1,4 +1,4 @@
-# FCUK PAYWALLS
+# OpenTab
 
 [**Open Source Tools. Zero Bullsh*t.**
 The internet has walls — paywalls, login walls, signup walls. This index collects the keys: curated open-source tools you can use instantly in your browser. No accounts, no emails, no tracking. Just tools that work.
@@ -7,13 +7,13 @@ The internet has walls — paywalls, login walls, signup walls. This index colle
 
 ## What is this?
 
-FCUK PAYWALLS is a React + TypeScript project. If you want to run it locally, simply clone the repo, install the dependencies, and run the server.
+OpenTab is a React + TypeScript project. If you want to run it locally, simply clone the repo, install the dependencies, and run the server.
 
 Here's a command that would do all the previous steps in one go:
 
 ```bash
-git clone https://github.com/vaibhxvvy/fcuk-paywalls.git && \
-cd fcuk-paywalls && \
+git clone https://github.com/vaibhxvvy/opentab.git && \
+cd opentab && \
 npm install && \
 npm run dev
 ```
@@ -76,7 +76,7 @@ The default categories are:
 - The tool must work **without creating an account**
 - Keep descriptions under 140 characters
 - Use 3-5 relevant tags per tool
-- Use the following link to add a tool you [found/made](https://github.com/vaibhxvvy/fcuk-paywalls/issues/new?template=request-to-add-a-tool.md) or simply use the "BREAK THE WALL" button on the website.
+- Use the following link to add a tool you [found/made](https://github.com/vaibhxvvy/opentab/issues/new?template=request-to-add-a-tool.md) or simply use the "BREAK THE WALL" button on the website.
 
 ---
 
@@ -96,7 +96,7 @@ It's simple. We're at 200+ tools, and a lot of them are similar. To break the ho
 
 ## License
 
-The FCUK PAYWALLS directory code is released under the **GPL-3.0 License**.
+The OpenTab directory code is released under the **GPL-3.0 License**.
 
 Individual tools listed in the directory retain their own licenses. We do not claim ownership of any third-party projects.
 

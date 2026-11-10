@@ -339,7 +339,7 @@ export function InvoiceGenerator() {
     };
 
     const drawFooter = (f: typeof helv, color = gray) => {
-      page.drawText("FP INVOICES — no invoice service counted this one. generated locally by fcuk paywalls", {
+      page.drawText("FP INVOICES — no invoice service counted this one. generated locally by opentab", {
         x: M,
         y: 40,
         size: 7,
@@ -617,7 +617,7 @@ let codeX = M + W;
         page.drawText("NOTES", { x: M, y: ty - 58, size: 8, font: helvB, color: light });
         page.drawText(sNotes, { x: M, y: ty - 70, size: 9, font: helv, color: paper, maxWidth: W * 0.9 });
       }
-      page.drawText("FP INVOICES — no invoice service counted this one. generated locally by fcuk paywalls", {
+      page.drawText("FP INVOICES — no invoice service counted this one. generated locally by opentab", {
         x: M,
         y: 40,
         size: 7,
@@ -734,7 +734,7 @@ let codeX = M + W;
         page.drawText("NOTES", { x: M, y: ty - 58, size: 8, font: helvB, color: blue });
         page.drawText(sNotes, { x: M, y: ty - 70, size: 9, font: helv, color: blue, maxWidth: W * 0.9 });
       }
-      page.drawText("FP INVOICES — no invoice service counted this one. generated locally by fcuk paywalls", {
+      page.drawText("FP INVOICES — no invoice service counted this one. generated locally by opentab", {
         x: M,
         y: 40,
         size: 7,
@@ -1308,7 +1308,7 @@ function PreviewPage(props: PreviewProps) {
 
   const footer = (
     <p className="mt-auto pt-4 text-[8px] text-ink/30">
-      FP INVOICES — no invoice service counted this one. generated locally by fcuk paywalls
+      FP INVOICES — no invoice service counted this one. generated locally by opentab
     </p>
   );
 
@@ -1619,7 +1619,7 @@ function PreviewPage(props: PreviewProps) {
           )}
           {codeBlockInvert}
           <p className="mt-auto pt-4 text-[8px] text-paper/30">
-            FP INVOICES — no invoice service counted this one. generated locally by fcuk paywalls
+            FP INVOICES — no invoice service counted this one. generated locally by opentab
           </p>
         </div>
       </div>
@@ -1798,7 +1798,7 @@ function PreviewPage(props: PreviewProps) {
           )}
           {codeBlock}
           <p className="mt-auto pt-4 text-[8px] text-blue/50">
-            FP INVOICES — no invoice service counted this one. generated locally by fcuk paywalls
+            FP INVOICES — no invoice service counted this one. generated locally by opentab
           </p>
         </div>
       </div>

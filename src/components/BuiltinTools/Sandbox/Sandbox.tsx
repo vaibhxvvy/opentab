@@ -4,7 +4,7 @@ import { ToolShell } from "../shared/ToolShell";
 import { Button } from "../../ui/button";
 import { cn } from "../../../utils/cn";
 
-const TEMPLATE = `// fcuk-paywalls sandbox
+const TEMPLATE = `// opentab sandbox
 // Runs in a sandboxed iframe — no DOM, no network.
 // console.log lands below.
 const walls = 234;

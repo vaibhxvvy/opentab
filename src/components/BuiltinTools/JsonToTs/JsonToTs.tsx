@@ -6,7 +6,7 @@ import { cn } from "../../../utils/cn";
 
 const SAMPLE = {
   id: 234,
-  name: "fcuk-paywalls",
+  name: "opentab",
   live: true,
   tags: ["tools", "no-signup"],
   meta: {

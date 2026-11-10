@@ -1,12 +1,12 @@
 /**
- * FCUK PAYWALLS — Tool Submission Worker
+ * OpenTab — Tool Submission Worker
  *
  * Creates a GitHub issue for every tool submission.
  *
  * Secrets (set via: npx wrangler secret put <NAME>):
  *   GITHUB_TOKEN       - Personal access token with `repo` scope
  *   GITHUB_REPO_OWNER  - "vaibhxvvy"
- *   GITHUB_REPO_NAME   - "fcuk-paywalls"
+ *   GITHUB_REPO_NAME   - "opentab"
  */
 
 import { handleSubmitTool } from "./urlHandlers/handleSubmitTool";

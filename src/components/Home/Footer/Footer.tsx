@@ -13,7 +13,7 @@ export function Footer() {
             About
           </h3>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-paper/70">
-            FCUK PAYWALLS is a curated index of tools that respect your time.
+            OpenTab is a curated index of tools that respect your time.
             No accounts. No spam. No dark patterns. The wall is the problem —
             these are the solutions.
           </p>
@@ -32,7 +32,7 @@ export function Footer() {
               Break the wall
             </Button>
             <a
-              href="https://github.com/vaibhxvvy/fcuk-paywalls/issues/new"
+              href="https://github.com/vaibhxvvy/opentab/issues/new"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-widest text-paper/70 underline-offset-2 hover:text-yellow hover:underline"
@@ -56,10 +56,10 @@ export function Footer() {
       <div className="border-t-2 border-paper/20">
         <div className="page-container flex flex-wrap items-center justify-between gap-3 py-5">
           <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-paper/60">
-            © 2026 FCUK PAYWALLS /// CURATED WITH SPITE
+            © 2026 OpenTab /// CURATED WITH SPITE
           </p>
           <a
-            href="https://github.com/vaibhxvvy/fcuk-paywalls"
+            href="https://github.com/vaibhxvvy/opentab"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-[11px] font-semibold uppercase tracking-widest text-paper/60 underline-offset-2 hover:text-yellow hover:underline"

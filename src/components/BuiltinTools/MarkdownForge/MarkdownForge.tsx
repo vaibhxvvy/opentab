@@ -4,7 +4,7 @@ import { marked } from "marked";
 import { ToolShell } from "../shared/ToolShell";
 import { Button } from "../../ui/button";
 
-const SAMPLE = `# FCUK PAYWALLS
+const SAMPLE = `# OpenTab
 
 > No paywalls. No signups. **No accounts.**
 

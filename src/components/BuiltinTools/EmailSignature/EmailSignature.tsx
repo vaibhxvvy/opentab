@@ -9,10 +9,10 @@ const inputCls =
 export function EmailSignature() {
   const [name, setName] = useState("Rhea Sharma");
   const [role, setRole] = useState("Lead Designer");
-  const [company, setCompany] = useState("FCUK PAYWALLS CO.");
-  const [email, setEmail] = useState("rhea@fcukpaywalls.com");
+  const [company, setCompany] = useState("OpenTab Co.");
+  const [email, setEmail] = useState("rhea@opentab.com");
   const [phone, setPhone] = useState("+91 98765 43210");
-  const [website, setWebsite] = useState("fcukpaywalls.com");
+  const [website, setWebsite] = useState("opentab.com");
   const [accent, setAccent] = useState("#FFD84D");
 
   const esc = (s: string) =>

@@ -232,7 +232,7 @@ function toScalarYaml(v: unknown): string {
 }
 
 const SAMPLE_YAML = `# the arsenal config, obviously
-name: fcuk paywalls
+name: opentab
 free: true
 revenue_model: null
 languages:
@@ -252,7 +252,7 @@ notes: |
   block scalars are supported
 `;
 const SAMPLE_JSON = `{
-  "name": "fcuk paywalls",
+  "name": "opentab",
   "free": true,
   "revenue_model": null,
   "languages": ["typescript", "css"],

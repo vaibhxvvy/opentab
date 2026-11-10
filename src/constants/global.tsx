@@ -1,1 +1,1 @@
-export const REPO_URL = "https://api.github.com/repos/vaibhxvvy/fcuk-paywalls";
+export const REPO_URL = "https://api.github.com/repos/vaibhxvvy/opentab";

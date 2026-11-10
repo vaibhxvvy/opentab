@@ -5,7 +5,7 @@ import { Button } from "../../ui/button";
 import { cn } from "../../../utils/cn";
 
 const SAMPLE = {
-  name: "FCUK PAYWALLS",
+  name: "OpenTab",
   mission: "Collect the keys",
   stats: { tools: 234, walls: 0, accounts: 0 },
   tags: ["open-source", "in-browser", "no-signup"],

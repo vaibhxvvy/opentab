@@ -67,10 +67,10 @@ export function EventForge() {
     const lines = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
-      "PRODID:-//FCUK-PAYWALLS//EVENT-FORGE//EN",
+      "PRODID:-//OpenTab//EVENT-FORGE//EN",
       "CALSCALE:GREGORIAN",
       "BEGIN:VEVENT",
-      `UID:${uid()}@fcuk-paywalls`,
+      `UID:${uid()}@opentab`,
       `DTSTAMP:${fmtUtc(new Date().toISOString())}Z`,
       dtstart,
       dtend,

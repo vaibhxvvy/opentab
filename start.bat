@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 cd /d "%~dp0"
-title FCUK PAYWALLS - DEV
+title OpenTab - DEV
 
 where npm >nul 2>nul
 if errorlevel 1 (
